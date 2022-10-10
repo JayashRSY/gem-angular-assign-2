@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form [formGroup]="userForm" (ngSubmit)="validateForm()" class="border rounded p-4 col-xs-12 col-sm-6">
+            <div class="form-group">
+                <label>Name</label>
+                <input formControlName="name" type="text" class="form-control" placeholder="Enter name">
+                <small *ngIf="submitted && userForm.controls['name'].errors">Please enter correct name</small>
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input formControlName="gender" class="form-control" value="male" class="form-check-input"
+                        type="radio" id="genderRadio1" checked>
+                    <label class="form-check-label" for="genderRadio1">Male</label>
+                </div>
+                <div class="form-check">
+                    <input formControlName="gender" class="form-control" value="female" class="form-check-input"
+                        type="radio" id="genderRadio2">
+                    <label class="form-check-label" for="genderRadio2">Female</label>
+                </div>
+                <small *ngIf="submitted && userForm.controls['gender'].errors">Please select gender</small>
+            </div>
+
+            <div class="form-group">
+                <label>Email address</label>
+                <input formControlName="email" type="text" class="form-control" placeholder="Enter email">
+                <small *ngIf="submitted && userForm.controls['email'].errors">Please enter correct email</small>
+            </div>
+            <div class="form-group">
+                <label>Mobile</label>
+                <input formControlName="mobile" class="form-control" type="text" class="form-control"
+                    placeholder="Enter mobile number">
+                <small *ngIf="submitted && userForm.controls['mobile'].errors">please enter correct mobile
+                    number</small>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select formControlName="category" class="form-control">
+                    <option value="general">General</option>
+                    <option value="obc">OBC</option>
+                    <option value="scst">SC/ST</option>
+                </select>
+                <small *ngIf="submitted && userForm.controls['category'].errors">please select category</small>
+            </div>
+
+            <div class="form-group">
+                <label>Technology : &nbsp;</label>
+                <div class="d-inline" *ngFor="let technology of technologies; let i=index">
+                    <input type="checkbox" [value]="technology.value"
+                        (change)="onCheckboxChange($event)" />&nbsp;{{ technology.name}}&nbsp;
+                </div>
+                <small *ngIf="submitted && userForm.controls['technology'].errors">please select category</small>
+            </div>
+            <div class="form-group">
+                <label>Profile picture (Optional)</label>
+                <input type="file" class="form-control" (change)="onSelectFile($event)">
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">Preview</button>
+
+            <!-- MODAL -->
+            <div *ngIf="isModal" class="user-modal">
+                <!-- Modal content -->
+                <div class="user-modal-content">
+
+                    <div class="p-3 border rounded">
+                        <div class="text-center">
+                            <img class="profile-picture border rounded-circle p-2" [src]='imgUrl'
+                                alt="user picture">
+                        </div>
+                        <div class="m-2 p-2">
+                            <h5 class="text-center text-bg-dark border rounded p-1"> {{ userForm.value.name }}</h5>
+                            <p class="row"><span class="col-4 fw-bold">Gender</span>{{ userForm.value.gender }}</p>
+                            <p class="row"><span class="col-4 fw-bold">Email</span> {{ userForm.value.email }}</p>
+                            <p class="row"><span class="col-4 fw-bold">Mobile</span> {{ userForm.value.mobile }}</p>
+                            <p class="row"><span class="col-4 fw-bold">Category</span> {{ userForm.value.category }}</p>
+                            <div><span class="col-4 fw-bold me-2">Technology</span>
+                                <span *ngFor="let tech of userForm.value.technology" class="border rounded p-1 me-2 text-bg-primary">{{ tech }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 d-flex justify-content-end">
+                        <button (click)="isModal=false" class="mx-2 btn btn-dark close">Cancel</button>
+                        <button (click)="submitData()" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
