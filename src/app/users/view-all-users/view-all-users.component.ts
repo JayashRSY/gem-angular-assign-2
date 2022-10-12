@@ -11,6 +11,7 @@ export class ViewAllUsersComponent implements OnInit {
   constructor(private _userService:UsersService) { }
 
   users: any = []
+  // GETTING USERS DATA FROM SERVICE
   ngOnInit(): void {
     this._userService.getUsers().subscribe(users => {
       this.users = users;
