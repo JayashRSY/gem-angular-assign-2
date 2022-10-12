@@ -20,9 +20,12 @@ export class UsersService {
     },
   ]
 
+  // SENDING USERS DATA IN REAL TIME
   getUsers(): Observable<any> {
     return of(this.users);
   }
+
+  // UPDATING USERS DATA
   updateUsers(user: any) {
     this.users.push(user)
   }

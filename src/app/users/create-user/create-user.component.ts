@@ -32,8 +32,11 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
-  // FILE UPLOAD
+  // DEFAULT PROFILE PICTURE IF USER DOES NOT UPLOAD A PICTURE
+
   imgUrl = '../../../assets/images/profile-icon.png'
+  
+  // GETTING IMAGE FROM USER IN BASE64
   onSelectFile(e: any) {
     if(e.target.files) {
       var reader = new FileReader();
@@ -45,6 +48,7 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
+  // REACTIVE FROM
   ngOnInit(): void {
     this.userForm = new FormGroup({
       'name': new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.minLength(2), Validators.pattern(/(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/)]),
